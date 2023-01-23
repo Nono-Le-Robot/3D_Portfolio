@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import Scene from "./components/Scene";
+import Desk from "./components/Desk";
 import React, { useState, useEffect, useRef, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import * as THREE from "three";
@@ -17,14 +17,28 @@ import Camera from "./components/Camera";
 import Keyboard from "./components/Keyboard";
 import Lights from "./components/Lights";
 import MoveMouse from "./components/MoveMouse";
+import Guitar from "./components/Guitar";
+import Rl from "./components/Rl";
+import Printer from "./components/Printer";
+import Plant from "./components/Plant";
+import Drone from "./components/Drone";
+import Stack from "./components/Stack";
+import { Box } from "@react-three/drei";
 
 export default function App() {
+  const [goBack, setGoBack] = useState(false);
+
+  const handleGoBack = (data) => {
+    setGoBack(data);
+  };
+
   return (
     <>
       <BrowserRouter>
         <Canvas shadows>
-          <Camera position={[6, 0, 4]} fo />
+          <Camera position={[6, -1, 3]} rotation={[0, 1, 0]} />
           <Lights />
+
           <EffectComposer multisampling={0} disableNormalPass={true}>
             {/* <DepthOfField
               focusDistance={0}
@@ -37,25 +51,17 @@ export default function App() {
             <Vignette eskil={false} offset={0.1} darkness={0.7} />
           </EffectComposer>
           <Suspense fallback={<Loader />}>
-            <Scene />
+            <Desk goBack={goBack} />
+            <Guitar />
+            <Rl />
+            <Printer />
+            <Plant />
+            <Drone />
+            <Stack onGoBack={handleGoBack} />
           </Suspense>
-          <OrbitControls
-            // minAzimuthAngle={-Math.PI / 0.62}
-            // maxAzimuthAngle={Math.PI / 1.35}
-            // minPolarAngle={Math.PI / 7}
-            // maxPolarAngle={Math.PI - Math.PI / 2.1}
-            // enablePan={false}
-            // enableZoom={true}
-            // enableRotate={true}
-            enableDamping={false}
-            // maxDistance={13}
-            // minDistance={3}
-            // regress
-          />
+          {/* <OrbitControls enableDamping={false} /> */}
           {/* <AdaptiveDpr pixelated />
           <AdaptiveEvents /> */}
-          <Keyboard />
-          <MoveMouse />
         </Canvas>
       </BrowserRouter>
     </>

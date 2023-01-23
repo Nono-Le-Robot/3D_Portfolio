@@ -1,31 +1,35 @@
-import { useFrame, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import React, { useRef, useEffect } from "react";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
+import { useFrame, useLoader } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
 
-export default function Keyboard() {
-  const model = useLoader(GLTFLoader, "./models/scene.glb");
-  const keys = model.scene.children[14].children[0].children[0].children.filter(
-    (res) => res.name.includes("key")
-  );
-  let keyPositions = {};
-  keys.forEach((key) => {
-    keyPositions[key.name] = key.position.y;
-  });
+export default function MoveMouse() {
+  // Initialiser les chargeurs
+  const loader = new GLTFLoader();
+  const dracoLoader = new DRACOLoader();
+  dracoLoader.setDecoderPath("./gltf/");
+  loader.setDRACOLoader(dracoLoader);
 
-  document.onkeydown = function (e) {
-    e.preventDefault();
+  // Récupérer la référence de la scène
+  const sceneRef = useRef();
 
-    keys.forEach((key) => {
-      if (key.name === "key_" + e.key) {
-        key.position.y = keyPositions[key.name] - 4;
+  // const keys = keyboard[0].children[0].children[0].children.filter((res) =>
+  //   res.name.includes("key")
+  // );
+
+  // // Charger le modèle
+  useEffect(() => {
+    loader.load(
+      "./models/desk/deskcompressed.glb",
+      (d) => {
+        sceneRef.current.add(d.scene);
+      },
+      null,
+      (e) => {
+        console.error(e);
       }
-    });
-  };
-
-  document.onkeyup = function (e) {
-    keys.forEach((key) => {
-      if (key.name === "key_" + e.key) {
-        key.position.y = keyPositions[key.name];
-      }
-    });
-  };
+    );
+  }, []);
+  return <mesh ref={sceneRef} />;
 }
