@@ -4,7 +4,19 @@ import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { useFrame } from "@react-three/fiber";
 import { useThree } from "@react-three/fiber";
 import { MathUtils, Vector3 } from "three";
-export default function Guitar() {
+import sound from "../sounds/mouse-click.mp3";
+export default function Drone() {
+  const [startSoundClick, setStartSoundClick] = useState(false);
+  useEffect(() => {
+    if (startSoundClick) {
+      playSoundClick();
+      setStartSoundClick(false);
+    }
+  }, [startSoundClick]);
+
+  function playSoundClick() {
+    new Audio(sound).play();
+  }
   // Récupérer la référence de la scène
   const sceneRef = useRef();
   const [loaded, setLoaded] = useState(false);
@@ -48,40 +60,28 @@ export default function Guitar() {
         sceneRef.current.position.y = MathUtils.lerp(
           sceneRef.current.position.y,
           mouse.y * 2,
-          0.05
+          0.01
         );
         sceneRef.current.rotation.z = MathUtils.lerp(
           sceneRef.current.rotation.z,
           -mouse.y / 4,
-          0.05
+          0.01
         );
         sceneRef.current.position.z = MathUtils.lerp(
           sceneRef.current.position.z,
           (sceneRef.current.position.z = -mouse.x * 6.5 + 11.8),
-          0.05
+          0.01
         );
         sceneRef.current.rotation.y = MathUtils.lerp(
           sceneRef.current.rotation.y,
           (sceneRef.current.rotation.y = -mouse.x),
-          0.05
+          0.01
         );
         sceneRef.current.rotation.x = MathUtils.lerp(
           sceneRef.current.rotation.x,
           (sceneRef.current.rotation.x = -mouse.x),
-          0.05
+          0.01
         );
-        camera.position.y = MathUtils.lerp(
-          camera.position.y - 0.05,
-          mouse.y,
-          0.05
-        );
-        camera.position.z = MathUtils.lerp(
-          camera.position.z + 0.6,
-          -mouse.x,
-          0.05
-        );
-
-        camera.position.x = MathUtils.lerp(camera.position.x, 7, 0.05);
       }
 
       // Math.sin(yPos) * 0.04 + 0.5;
@@ -102,6 +102,15 @@ export default function Guitar() {
     <mesh
       onClick={() => {
         setControlDrone(!controlDrone);
+        setStartSoundClick(true);
+      }}
+      onPointerOver={(e) => {
+        document.querySelector("canvas").style.cursor = "pointer";
+        // e.stopPropagation();
+      }}
+      onPointerOut={(e) => {
+        document.querySelector("canvas").style.cursor = "default";
+        // e.stopPropagation();
       }}
       ref={sceneRef}
     />

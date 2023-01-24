@@ -2,14 +2,25 @@ import React, { useRef, useEffect, useState } from "react";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { useFrame } from "@react-three/fiber";
-import { useControls } from "leva";
-import { MathUtils, Vector3 } from "three";
 import { useThree } from "@react-three/fiber";
+import state from "../state";
+import sound from "../sounds/mouse-click.mp3";
 
-export default function ArrowBack({ onGoBack }) {
+export default function ArrowBack() {
+  const [startSoundClick, setStartSoundClick] = useState(false);
+  useEffect(() => {
+    if (startSoundClick) {
+      playSoundClick();
+      setStartSoundClick(false);
+    }
+  }, [startSoundClick]);
+
+  function playSoundClick() {
+    new Audio(sound).play();
+  }
+
   const { camera, mouse } = useThree();
 
-  const [goBack, setGoBack] = useState(false);
   // Récupérer la référence de la scène
   const sceneRef = useRef();
 
@@ -25,9 +36,9 @@ export default function ArrowBack({ onGoBack }) {
     loader.load(
       "./models/arrow.glb",
       (d) => {
-        sceneRef.current.position.x = 9;
-        sceneRef.current.position.y = 1.5;
-        sceneRef.current.position.z = -14.3;
+        sceneRef.current.position.x = 16;
+        sceneRef.current.position.y = 2;
+        sceneRef.current.position.z = -22;
         sceneRef.current.add(d.scene);
         setLoaded(true);
       },
@@ -41,9 +52,36 @@ export default function ArrowBack({ onGoBack }) {
     if (loaded) {
     }
   });
-  const handleClick = () => {
-    onGoBack(true);
+
+  const handleClick = (num) => {
+    const position = {
+      1: {
+        cameraPos: [7, -1, 3],
+        target: [0, 0, -1.5],
+      },
+    };
+    state.cameraPos.set(...position[num].cameraPos);
+    state.target.set(...position[num].target);
+    state.shouldUpdate = true;
   };
 
-  return <mesh onClick={handleClick} scale={8} ref={sceneRef} />;
+  return (
+    <mesh
+      onClick={(e) => {
+        e.stopPropagation();
+        setStartSoundClick(true);
+        handleClick(1);
+      }}
+      onPointerOver={(e) => {
+        document.querySelector("canvas").style.cursor = "pointer";
+        // e.stopPropagation();
+      }}
+      onPointerOut={(e) => {
+        document.querySelector("canvas").style.cursor = "default";
+        // e.stopPropagation();
+      }}
+      scale={11}
+      ref={sceneRef}
+    />
+  );
 }

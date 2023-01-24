@@ -14,7 +14,7 @@ export default function Lights() {
       ></pointLight>
       <pointLight
         castShadow
-        intensity={0.8}
+        intensity={0.3}
         position={[1, 2.5, 0]}
       ></pointLight>
     </>

@@ -3,8 +3,9 @@ import FirstPage from "./FirstPage";
 import BtnCompetences from "./BtnCompetences";
 import BtnHobbies from "./BtnHobbies";
 import BtnInfos from "./BtnInfos";
+import BtnProjects from "./BtnProjects";
 
-export default function Screen({ goBack }) {
+export default function Screen() {
   // Récupérer la référence de la scène
   const [firstEnd, setFirstEnd] = useState(false);
   const handleFirstEnd = (value) => {
@@ -17,9 +18,10 @@ export default function Screen({ goBack }) {
   return (
     <>
       <FirstPage onFirstEnd={handleFirstEnd} />
-      <BtnCompetences goBack={goBack} firstEnd={firstEnd} />
+      <BtnCompetences firstEnd={firstEnd} />
       <BtnHobbies firstEnd={firstEnd} />
       <BtnInfos firstEnd={firstEnd} />
+      <BtnProjects firstEnd={firstEnd} />
       {/* <mesh ref={sceneRef} />; */}
     </>
   );

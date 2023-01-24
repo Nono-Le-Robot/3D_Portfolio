@@ -4,8 +4,22 @@ import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { useFrame } from "@react-three/fiber";
 import { MathUtils, Vector3 } from "three";
 import { useThree } from "@react-three/fiber";
+import state from "../state";
+import sound from "../sounds/mouse-click.mp3";
 
-export default function BtnHobbies(props) {
+export default function BtnHobbies({ firstEnd }) {
+  const [startSoundClick, setStartSoundClick] = useState(false);
+  useEffect(() => {
+    if (startSoundClick) {
+      playSoundClick();
+      setStartSoundClick(false);
+    }
+  }, [startSoundClick]);
+
+  function playSoundClick() {
+    new Audio(sound).play();
+  }
+
   // Récupérer la référence de la scène
   const sceneRef = useRef(null);
   const [goCompetences, setGoCompetences] = useState(false);
@@ -25,7 +39,10 @@ export default function BtnHobbies(props) {
         sceneRef.current.add(d.scene);
         sceneRef.current.position.x = 0;
         sceneRef.current.position.y = -1.27;
-        sceneRef.current.position.z = 2.2;
+        sceneRef.current.position.z = 1;
+        sceneRef.current.rotation.x = -Math.PI / 2;
+        sceneRef.current.rotation.y = -Math.PI / 1.93;
+        sceneRef.current.rotation.z = -Math.PI / 2;
       },
       null,
       (e) => {
@@ -34,39 +51,40 @@ export default function BtnHobbies(props) {
     );
   }, []);
   useFrame((state, delta) => {
-    if (goCompetences) {
-      camera.position.x = MathUtils.lerp(camera.position.x, 16, 0.025);
-      camera.position.y = MathUtils.lerp(camera.position.y, 1, 0.025);
-      camera.position.z = MathUtils.lerp(camera.position.z, 17, 0.025);
-      camera.rotation.x = MathUtils.lerp(camera.rotation.x, 0.0, 0.025);
-      camera.rotation.y = MathUtils.lerp(camera.rotation.y, 1.8, 0.025);
-      camera.rotation.z = MathUtils.lerp(camera.rotation.z, 0, 0.025);
-    }
-
-    if (props.firstEnd) {
-      if (!hoverBtn && !leaveBtn)
-        sceneRef.current.position.x = MathUtils.lerp(
-          sceneRef.current.position.x,
-          0.42,
-          0.15
-        );
-
+    if (firstEnd) {
+      sceneRef.current.position.x = MathUtils.lerp(
+        sceneRef.current.position.x,
+        0.63,
+        0.1
+      );
       if (hoverBtn) {
         sceneRef.current.position.x = MathUtils.lerp(
           sceneRef.current.position.x,
-          0.47,
-          0.025
+          0.58,
+          0.1
         );
       }
       if (leaveBtn) {
         sceneRef.current.position.x = MathUtils.lerp(
           sceneRef.current.position.x,
-          0.42,
-          0.025
+          0.63,
+          0.1
         );
       }
     }
   });
+
+  const handleClick = (num) => {
+    const position = {
+      1: {
+        cameraPos: [8, 0, 10],
+        target: [5, 0, 10],
+      },
+    };
+    state.cameraPos.set(...position[num].cameraPos);
+    state.target.set(...position[num].target);
+    state.shouldUpdate = true;
+  };
 
   let scale = 0.12;
   return (
@@ -75,18 +93,21 @@ export default function BtnHobbies(props) {
       rotation={[0, -1.57, 0]}
       scale={[scale, scale, scale]}
       onPointerOver={(e) => {
-        e.stopPropagation();
+        document.querySelector("canvas").style.cursor = "pointer";
+        // e.stopPropagation();
         setHoverBtn(true);
         setLeaveBtn(false);
       }}
       onPointerOut={(e) => {
-        e.stopPropagation();
+        document.querySelector("canvas").style.cursor = "default";
+        // e.stopPropagation();
         setLeaveBtn(true);
         setHoverBtn(false);
       }}
       onClick={(e) => {
         e.stopPropagation();
-        setGoCompetences(true);
+        setStartSoundClick(true);
+        handleClick(1);
       }}
       ref={sceneRef}
     />

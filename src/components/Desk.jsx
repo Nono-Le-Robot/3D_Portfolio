@@ -5,8 +5,13 @@ import { useFrame } from "@react-three/fiber";
 import { useThree } from "@react-three/fiber";
 import keyboardjs from "keyboardjs";
 import Screen from "./Screen";
+import MySharingBase from "./MySharingBase";
+import Tuner from "./Tuner";
+import JsAssist from "./JsAssis";
+import Groupomania from "./Groupomania";
+import ArrowBack2 from "./ArrowBack2";
 
-export default function Desk({ goBack }) {
+export default function Desk() {
   // Récupérer la référence de la scène
 
   const sceneRef = useRef(null);
@@ -83,7 +88,12 @@ export default function Desk({ goBack }) {
   // render
   return (
     <>
-      <Screen goBack={goBack} />
+      <Screen />
+      <MySharingBase />
+      <Tuner />
+      <JsAssist />
+      <Groupomania />
+      <ArrowBack2 />
       <mesh ref={sceneRef} />;
     </>
   );

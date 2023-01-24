@@ -10,172 +10,33 @@ body,
   margin: 0;
   background: #000000;
 }
-#root {
-}
+
 canvas {
   background-image: linear-gradient(90deg, #000000, #141415);
 }
 
-.fade-in {
-  animation: fadeIn 2s forwards linear;
-}
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    background-image: linear-gradient(90deg, #000000, #141415);
-  }
-
-  90% {
-    opacity: 0.8;
-  }
-
-  100% {
-    opacity: 1;
-    background-image: linear-gradient(90deg, #00000000, #14141500);
-  }
-}
-
-#overlay {
-  pointer-events: none;
-  overflow: hidden;
+#load-model {
+  color: white;
+  background-color: black;
+  text-align: center;
+  font-size: 2rem;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5rem;
-  text-align: center;
-  font-size: 15px;
-  width: 100vw;
-  height: 100vh;
-  font-weight: 800;
-  color: white;
+}
+
+#loader-test {
   position: absolute;
+  background-color: black;
+  color: white;
   z-index: 999;
   top: 50vh;
   left: 50vw;
   transform: translateX(-50%) translateY(-50%);
-}
-
-.darken {
-  animation: darken 1s forwards;
-}
-.fade-out {
-  animation: fadeOut 1s forwards;
-}
-
-#instructions {
-  margin-top: 5rem;
-  opacity: 0;
-  animation: spawn 2s 1s forwards;
-}
-
-#input-device-select {
-  pointer-events: all;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.596);
-  border: none;
-  border-radius: 1rem;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  padding: 1rem;
-  background-image: linear-gradient(45deg, #444444, #313030);
-  color: white;
-  font-size: 1rem;
-  width: 34vw;
-}
-.secondary-input {
-  text-align: center;
-  font-size: 15px;
-  background-color: #313030;
-  color: white;
-}
-
-#select-input {
-  opacity: 0;
-  animation: spawn 2s 1.5s forwards;
+  width: 100vw;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-canvas:hover {
-  cursor: grab;
-}
-canvas:active {
-  cursor: grabbing;
-}
-
-#main-screen {
-  position: absolute;
-
-  display: none;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  animation: select-input 0.5s 2.5s forwards ease-in-out;
-}
-
-#devices {
-  margin-bottom: 5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-}
-#input-device-select:hover {
-  cursor: pointer;
-}
-
-#mic-img {
-  pointer-events: all;
-  width: 45px;
-  border-radius: 50%;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.605);
-}
-
-#mic-img:hover {
-  cursor: pointer;
-}
-
-@keyframes darken {
-  from {
-    background-color: rgba(0, 0, 0, 0);
-  }
-
-  to {
-    background-color: rgba(0, 0, 0, 0.402);
-  }
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-    background-color: rgba(0, 0, 0, 0);
-  }
-
-  to {
-    opacity: 0;
-    background-color: rgb(0, 0, 0);
-  }
-}
-
-@keyframes spawn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-#load-model {
-  color: white;
-  text-align: center;
-  transition: 2s;
   font-size: 2rem;
-  z-index: 999;
 }

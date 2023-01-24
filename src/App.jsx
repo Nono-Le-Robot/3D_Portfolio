@@ -1,4 +1,4 @@
-import { Canvas } from "@react-three/fiber";
+import { Canvas, extend, useThree } from "@react-three/fiber";
 import Desk from "./components/Desk";
 import React, { useState, useEffect, useRef, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -11,32 +11,40 @@ import {
   Bloom,
   Vignette,
 } from "@react-three/postprocessing";
-import { Stats, OrbitControls } from "@react-three/drei";
 import Loader from "./components/Loader";
-import Camera from "./components/Camera";
-import Keyboard from "./components/Keyboard";
 import Lights from "./components/Lights";
-import MoveMouse from "./components/MoveMouse";
 import Guitar from "./components/Guitar";
 import Rl from "./components/Rl";
 import Printer from "./components/Printer";
 import Plant from "./components/Plant";
 import Drone from "./components/Drone";
 import Stack from "./components/Stack";
-import { Box } from "@react-three/drei";
+import CameraControls from "./components/CameraControls";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+extend({ OrbitControls });
 
 export default function App() {
-  const [goBack, setGoBack] = useState(false);
-
-  const handleGoBack = (data) => {
-    setGoBack(data);
+  const Orbit = () => {
+    const { camera, gl } = useThree();
+    return (
+      <orbitControls
+        attach="orbitControls"
+        // enablePan={false}
+        // enableRotate={false}
+        // enableZoom={false}
+        args={[camera, gl.domElement]}
+      />
+    );
   };
-
   return (
     <>
       <BrowserRouter>
+        <Loader />
         <Canvas shadows>
-          <Camera position={[6, -1, 3]} rotation={[0, 1, 0]} />
+          <Orbit />
+          {/* <OrbitControls enableDamping={false} /> */}
+          <CameraControls />
+          {/* <Camera position={[6, -1, 3]} rotation={[0, 1, 0]} /> */}
           <Lights />
 
           <EffectComposer multisampling={0} disableNormalPass={true}>
@@ -51,15 +59,15 @@ export default function App() {
             <Vignette eskil={false} offset={0.1} darkness={0.7} />
           </EffectComposer>
           <Suspense fallback={<Loader />}>
-            <Desk goBack={goBack} />
+            <Desk />
             <Guitar />
             <Rl />
             <Printer />
             <Plant />
             <Drone />
-            <Stack onGoBack={handleGoBack} />
+            <Stack />
           </Suspense>
-          {/* <OrbitControls enableDamping={false} /> */}
+
           {/* <AdaptiveDpr pixelated />
           <AdaptiveEvents /> */}
         </Canvas>

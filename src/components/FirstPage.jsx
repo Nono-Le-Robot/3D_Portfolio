@@ -1,24 +1,26 @@
 import React, { useRef, useEffect, useState, Suspense } from "react";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
-import { useFrame } from "@react-three/fiber";
-import { MathUtils, Vector3 } from "three";
-import { useThree } from "@react-three/fiber";
 import url from "../videos/first.mp4";
 import * as THREE from "three";
+import state from "../state";
+import sound from "../sounds/mouse-click.mp3";
 
-export default function FirstPage({ onFirstEnd, goBack }) {
-  // Récupérer la référence de la scène
+export default function FirstPage({ onFirstEnd }) {
+  const [startSoundClick, setStartSoundClick] = useState(false);
   useEffect(() => {
-    console.log(goBack);
-  }, [goBack]);
+    if (startSoundClick) {
+      playSoundClick();
+      setStartSoundClick(false);
+    }
+  }, [startSoundClick]);
 
-  const sceneRef = useRef();
+  function playSoundClick() {
+    new Audio(sound).play();
+  }
+  // Récupérer la référence de la scène
+  const sceneRef = useRef(null);
   const [loaded, setLoaded] = useState(false);
-  const [yPos, setYPos] = useState(0);
-  const [ySpeed, setYSpeed] = useState(0.02);
   const [ready, setReady] = useState(false);
-  const { camera, mouse } = useThree();
+
   const [firstEnd, setFirstEnd] = useState(false);
   const [video] = useState(() => {
     const vid = document.createElement("video");
@@ -33,48 +35,6 @@ export default function FirstPage({ onFirstEnd, goBack }) {
     }
     return vid;
   });
-  // Initialiser les chargeurs
-  const loader = new GLTFLoader();
-  const dracoLoader = new DRACOLoader();
-  dracoLoader.setDecoderPath("./gltf/");
-  loader.setDRACOLoader(dracoLoader);
-
-  // Charger le modèle
-  useEffect(() => {
-    loader.load(
-      "./models/firstpage.glb",
-      (d) => {
-        sceneRef.current.add(d.scene);
-        setLoaded(true);
-      },
-      null,
-      (e) => {
-        console.error(e);
-      }
-    );
-  }, []);
-
-  const startDemo = () => {
-    setReady(true);
-  };
-  useFrame((state, delta) => {
-    if (ready) {
-      if (!goBack) {
-        camera.position.x = MathUtils.lerp(camera.position.x, 3, 0.025);
-        camera.position.y = MathUtils.lerp(camera.position.y, 0, 0.025);
-        camera.position.z = MathUtils.lerp(camera.position.z, 0.2, 0.025);
-        camera.rotation.y = MathUtils.lerp(camera.rotation.y, 1.57, 0.025);
-        camera.rotation.z = MathUtils.lerp(camera.rotation.z, 0.0, 0.025);
-      } else {
-        camera.position.x = MathUtils.lerp(camera.position.x, 48, 0.025);
-        camera.position.y = MathUtils.lerp(camera.position.y, 9, 0.025);
-        camera.position.z = MathUtils.lerp(camera.position.z, 0, 0.025);
-        camera.rotation.y = MathUtils.lerp(camera.rotation.y, -1.5, 0.025);
-        camera.rotation.x = MathUtils.lerp(camera.rotation.x, -0.1, 0.025);
-        camera.rotation.z = MathUtils.lerp(camera.rotation.z, 0, 0.025);
-      }
-    }
-  });
 
   useEffect(() => {
     if (loaded) {
@@ -86,23 +46,46 @@ export default function FirstPage({ onFirstEnd, goBack }) {
     }
   }, [loaded]);
 
+  const handleClick = (num) => {
+    setReady(true);
+    const position = {
+      1: {
+        cameraPos: [3, 0.5, 0],
+        target: [0, 0.1, 0],
+      },
+    };
+    state.cameraPos.set(...position[num].cameraPos);
+    state.target.set(...position[num].target);
+    state.shouldUpdate = true;
+    if (!firstEnd) {
+      setTimeout(() => {
+        video.play();
+      }, 1000);
+    }
+  };
+
   return (
     <>
       <mesh
         rotation={[Math.PI / 2, 1.64, -Math.PI / 2]}
         position={[0.5, 0.1, 0.1]}
         scale={[6.4, 3.45, 1]}
-        onClick={() => {
-          startDemo();
-          setTimeout(() => {
-            video.play();
-          }, 1000);
+        onClick={(e) => {
+          if (!startSoundClick) {
+            setStartSoundClick(true);
+          }
+          e.stopPropagation();
+          handleClick(1);
         }}
       >
         <planeGeometry />
-        <meshStandardMaterial emissive={"white"} side={THREE.DoubleSide}>
+        <meshStandardMaterial
+          emissive={"white"}
+          emissiveIntensity={0}
+          side={THREE.DoubleSide}
+        >
           <videoTexture attach="map" args={[video]} />
-          <videoTexture attach="emissiveMap" args={[video]} />
+          <videoTexture args={[video]} />
         </meshStandardMaterial>
       </mesh>
     </>
