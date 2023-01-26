@@ -37,11 +37,11 @@ export default function BtnCompetences({ firstEnd }) {
       "./models/btn-competences.glb",
       (d) => {
         sceneRef.current.add(d.scene);
-        sceneRef.current.position.x = 0;
-        sceneRef.current.position.y = -0.62;
-        sceneRef.current.position.z = -1;
+        sceneRef.current.position.x = -1;
+        sceneRef.current.position.y = -1.2;
+        sceneRef.current.position.z = -3.5;
         sceneRef.current.rotation.x = -Math.PI / 2;
-        sceneRef.current.rotation.y = -Math.PI / 1.93;
+        sceneRef.current.rotation.y = -Math.PI / 2;
         sceneRef.current.rotation.z = -Math.PI / 2;
       },
       null,
@@ -54,20 +54,20 @@ export default function BtnCompetences({ firstEnd }) {
     if (firstEnd) {
       sceneRef.current.position.x = MathUtils.lerp(
         sceneRef.current.position.x,
-        0.59,
+        0.34,
         0.1
       );
       if (hoverBtn) {
         sceneRef.current.position.x = MathUtils.lerp(
           sceneRef.current.position.x,
-          0.53,
+          0.27,
           0.1
         );
       }
       if (leaveBtn) {
         sceneRef.current.position.x = MathUtils.lerp(
           sceneRef.current.position.x,
-          0.59,
+          0.34,
           0.1
         );
       }
@@ -78,7 +78,7 @@ export default function BtnCompetences({ firstEnd }) {
   const handleClick = (num) => {
     const position = {
       1: {
-        cameraPos: [31.81, 2.72, -9.05],
+        cameraPos: [32.2, 2.72, -9.05],
         target: [31.77, 2.93, -16.92],
       },
     };

@@ -16,9 +16,13 @@ export default function Guitar() {
   // Charger le modèle
   useEffect(() => {
     loader.load(
-      "./models/rl/rlcompressed.glb",
+      "./models/gamecube.glb",
       (d) => {
         sceneRef.current.add(d.scene);
+        sceneRef.current.position.x = 1.3;
+        sceneRef.current.position.y = -2.3;
+        sceneRef.current.position.z = 6.3;
+        sceneRef.current.rotation.y = Math.PI / 2.5;
       },
       null,
       (e) => {
@@ -27,5 +31,5 @@ export default function Guitar() {
     );
   }, []);
 
-  return <mesh ref={sceneRef} />;
+  return <mesh scale={0.035} ref={sceneRef} />;
 }

@@ -27,7 +27,7 @@ export default function Desk() {
   // Charger le modèle
   useEffect(() => {
     loader.load(
-      "./models/desk/deskcompressed.glb",
+      "./models/deskcompressed.glb",
       (d) => {
         sceneRef.current.add(d.scene);
         setLoaded(true);
@@ -45,43 +45,43 @@ export default function Desk() {
         (res) => res.name === "mouse"
       );
       mouseModel[0].position.x = -mouse.y / 1.5 + 3.5;
-      mouseModel[0].position.z = -mouse.x / 1.5 - 4;
+      mouseModel[0].position.z = -mouse.x / 1.5 - 6;
     }
   });
 
-  useEffect(() => {
-    if (loaded) {
-      const keyboard = sceneRef.current.children[0].children.filter(
-        (res) => res.name === "keyboard"
-      );
+  // useEffect(() => {
+  //   if (loaded) {
+  //     const keyboard = sceneRef.current.children[0].children.filter(
+  //       (res) => res.name === "keyboard"
+  //     );
 
-      const keys = keyboard[0].children[0].children[0].children.filter((res) =>
-        res.name.includes("key")
-      );
-      let keyPositions = {};
-      keys.forEach((key) => {
-        keyPositions[key.name] = key.position.y;
-      });
+  //     const keys = keyboard[0].children[0].children[0].children.filter((res) =>
+  //       res.name.includes("key")
+  //     );
+  //     let keyPositions = {};
+  //     keys.forEach((key) => {
+  //       keyPositions[key.name] = key.position.y;
+  //     });
 
-      document.onkeydown = function (e) {
-        // e.preventDefault();
+  //     document.onkeydown = function (e) {
+  //       // e.preventDefault();
 
-        keys.forEach((key) => {
-          if (key.name === "key_" + e.key) {
-            key.position.y = keyPositions[key.name] - 4;
-          }
-        });
-      };
+  //       keys.forEach((key) => {
+  //         if (key.name === "key_" + e.key) {
+  //           key.position.y = keyPositions[key.name] - 4;
+  //         }
+  //       });
+  //     };
 
-      document.onkeyup = function (e) {
-        keys.forEach((key) => {
-          if (key.name === "key_" + e.key) {
-            key.position.y = keyPositions[key.name];
-          }
-        });
-      };
-    }
-  }, [loaded]);
+  //     document.onkeyup = function (e) {
+  //       keys.forEach((key) => {
+  //         if (key.name === "key_" + e.key) {
+  //           key.position.y = keyPositions[key.name];
+  //         }
+  //       });
+  //     };
+  //   }
+  // }, [loaded]);
 
   // //move keyboard
 

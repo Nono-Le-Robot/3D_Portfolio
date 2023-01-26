@@ -37,11 +37,11 @@ export default function BtnHobbies({ firstEnd }) {
       "./models/btn-hobbies.glb",
       (d) => {
         sceneRef.current.add(d.scene);
-        sceneRef.current.position.x = 0;
-        sceneRef.current.position.y = -1.27;
-        sceneRef.current.position.z = 1;
+        sceneRef.current.position.x = -1;
+        sceneRef.current.position.y = -1.7;
+        sceneRef.current.position.z = -1.8;
         sceneRef.current.rotation.x = -Math.PI / 2;
-        sceneRef.current.rotation.y = -Math.PI / 1.93;
+        sceneRef.current.rotation.y = -Math.PI / 2;
         sceneRef.current.rotation.z = -Math.PI / 2;
       },
       null,
@@ -54,20 +54,20 @@ export default function BtnHobbies({ firstEnd }) {
     if (firstEnd) {
       sceneRef.current.position.x = MathUtils.lerp(
         sceneRef.current.position.x,
-        0.63,
+        0.35,
         0.1
       );
       if (hoverBtn) {
         sceneRef.current.position.x = MathUtils.lerp(
           sceneRef.current.position.x,
-          0.58,
+          0.28,
           0.1
         );
       }
       if (leaveBtn) {
         sceneRef.current.position.x = MathUtils.lerp(
           sceneRef.current.position.x,
-          0.63,
+          0.35,
           0.1
         );
       }
@@ -77,8 +77,8 @@ export default function BtnHobbies({ firstEnd }) {
   const handleClick = (num) => {
     const position = {
       1: {
-        cameraPos: [8, 0, 10],
-        target: [5, 0, 10],
+        cameraPos: [8.8, 1.75, 8.43],
+        target: [4.6, 0.48, 8.66],
       },
     };
     state.cameraPos.set(...position[num].cameraPos);

@@ -10,7 +10,4 @@ export default function Camera(props) {
   const { camera, mouse } = useThree();
 
   const vec = new Vector3();
-  useFrame((state) => {
-    // state.camera.position.lerp(vec.set(4, 0, 0), 0.005);
-  });
 }

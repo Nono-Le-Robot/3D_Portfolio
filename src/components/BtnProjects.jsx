@@ -40,11 +40,11 @@ export default function BtnProjects({ firstEnd }) {
       "./models/btn-projets.glb",
       (d) => {
         sceneRef.current.add(d.scene);
-        sceneRef.current.position.x = 0;
-        sceneRef.current.position.y = -0.62;
-        sceneRef.current.position.z = 1;
+        sceneRef.current.position.x = -1;
+        sceneRef.current.position.y = -1.2;
+        sceneRef.current.position.z = -1.8;
         sceneRef.current.rotation.x = -Math.PI / 2;
-        sceneRef.current.rotation.y = -Math.PI / 1.93;
+        sceneRef.current.rotation.y = -Math.PI / 2;
         sceneRef.current.rotation.z = -Math.PI / 2;
       },
       null,
@@ -57,20 +57,20 @@ export default function BtnProjects({ firstEnd }) {
     if (firstEnd) {
       sceneRef.current.position.x = MathUtils.lerp(
         sceneRef.current.position.x,
-        0.58,
+        0.35,
         0.1
       );
       if (hoverBtn) {
         sceneRef.current.position.x = MathUtils.lerp(
           sceneRef.current.position.x,
-          0.5,
+          0.25,
           0.1
         );
       }
       if (leaveBtn) {
         sceneRef.current.position.x = MathUtils.lerp(
           sceneRef.current.position.x,
-          0.58,
+          0.33,
           0.1
         );
       }

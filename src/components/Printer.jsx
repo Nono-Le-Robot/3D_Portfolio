@@ -16,9 +16,13 @@ export default function Guitar() {
   // Charger le modèle
   useEffect(() => {
     loader.load(
-      "./models/3d-printer/3dprintercompressed.glb",
+      "./models/3dprintercompressed.glb",
       (d) => {
         sceneRef.current.add(d.scene);
+        sceneRef.current.position.x = 0;
+        sceneRef.current.position.y = -2.7;
+        sceneRef.current.position.z = 15.2;
+        sceneRef.current.rotation.y = Math.PI / 2;
       },
       null,
       (e) => {
@@ -27,5 +31,5 @@ export default function Guitar() {
     );
   }, []);
 
-  return <mesh ref={sceneRef} />;
+  return <mesh scale={0.5} ref={sceneRef} />;
 }

@@ -16,11 +16,13 @@ export default function Guitar() {
   // Charger le modèle
   useEffect(() => {
     loader.load(
-      "./models/plant/plantcompressed.glb",
+      "./models/plantcompressed.glb",
       (d) => {
         sceneRef.current.add(d.scene);
-        sceneRef.current.children[0].position.z = 1;
-        sceneRef.current.children[0].position.x = 0;
+        sceneRef.current.position.z = 6;
+        sceneRef.current.position.x = 0;
+        sceneRef.current.position.y = -3;
+        sceneRef.current.rotation.y = Math.PI / 2.3;
       },
       null,
       (e) => {
@@ -29,5 +31,5 @@ export default function Guitar() {
     );
   }, []);
 
-  return <mesh ref={sceneRef} />;
+  return <mesh scale={6} ref={sceneRef} />;
 }

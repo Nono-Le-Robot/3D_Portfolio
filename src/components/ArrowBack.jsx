@@ -48,10 +48,6 @@ export default function ArrowBack() {
       }
     );
   }, []);
-  useFrame(() => {
-    if (loaded) {
-    }
-  });
 
   const handleClick = (num) => {
     const position = {

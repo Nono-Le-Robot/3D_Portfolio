@@ -4,7 +4,7 @@ import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { useFrame } from "@react-three/fiber";
 import { useThree } from "@react-three/fiber";
 import { MathUtils, Vector3 } from "three";
-import sound from "../sounds/mouse-click.mp3";
+import sound from "../sounds/drone.mp3";
 export default function Drone() {
   const [startSoundClick, setStartSoundClick] = useState(false);
   useEffect(() => {
@@ -15,7 +15,9 @@ export default function Drone() {
   }, [startSoundClick]);
 
   function playSoundClick() {
-    new Audio(sound).play();
+    const audio = new Audio(sound);
+    audio.volume = 0.4;
+    audio.play();
   }
   // Récupérer la référence de la scène
   const sceneRef = useRef();
@@ -34,15 +36,15 @@ export default function Drone() {
   // Charger le modèle
   useEffect(() => {
     loader.load(
-      "./models/drone/dronecompressed.glb",
+      "./models/dronecompressed.glb",
       (d) => {
         sceneRef.current.add(d.scene);
         sceneRef.current.position.x = 4;
         sceneRef.current.position.y = 1;
-        sceneRef.current.position.z = 8;
+        sceneRef.current.position.z = 8.9;
         sceneRef.current.rotation.x = 0;
-        sceneRef.current.rotation.y = -0.2;
-        sceneRef.current.rotation.z = -0.1;
+        sceneRef.current.rotation.y = 0.1;
+        sceneRef.current.rotation.z = 0.2;
         setLoaded(true);
       },
       null,
@@ -60,31 +62,31 @@ export default function Drone() {
         sceneRef.current.position.y = MathUtils.lerp(
           sceneRef.current.position.y,
           mouse.y * 2,
-          0.01
+          0.05
         );
         sceneRef.current.rotation.z = MathUtils.lerp(
           sceneRef.current.rotation.z,
-          -mouse.y / 4,
-          0.01
+          -mouse.y / 8,
+          0.1
         );
         sceneRef.current.position.z = MathUtils.lerp(
           sceneRef.current.position.z,
-          (sceneRef.current.position.z = -mouse.x * 6.5 + 11.8),
-          0.01
+          (sceneRef.current.position.z = -mouse.x * 7 + 9.5),
+          0.1
         );
         sceneRef.current.rotation.y = MathUtils.lerp(
           sceneRef.current.rotation.y,
-          (sceneRef.current.rotation.y = -mouse.x),
-          0.01
+          (sceneRef.current.rotation.y = -mouse.x * 2),
+          0.1
         );
         sceneRef.current.rotation.x = MathUtils.lerp(
           sceneRef.current.rotation.x,
-          (sceneRef.current.rotation.x = -mouse.x),
-          0.01
+          (sceneRef.current.rotation.x = -mouse.x / 8),
+          0.1
         );
       }
-
-      // Math.sin(yPos) * 0.04 + 0.5;
+      setYPos(yPos + ySpeed);
+      sceneRef.current.position.y = Math.sin(yPos) * 0.15 * +0.5;
 
       // rotation des hélices
       const helices =
@@ -100,6 +102,7 @@ export default function Drone() {
 
   return (
     <mesh
+      scale={1}
       onClick={() => {
         setControlDrone(!controlDrone);
         setStartSoundClick(true);
