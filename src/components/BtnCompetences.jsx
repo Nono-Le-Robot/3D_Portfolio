@@ -54,7 +54,7 @@ export default function BtnCompetences({ firstEnd }) {
     if (firstEnd) {
       sceneRef.current.position.x = MathUtils.lerp(
         sceneRef.current.position.x,
-        0.34,
+        0.29,
         0.1
       );
       if (hoverBtn) {
@@ -67,7 +67,7 @@ export default function BtnCompetences({ firstEnd }) {
       if (leaveBtn) {
         sceneRef.current.position.x = MathUtils.lerp(
           sceneRef.current.position.x,
-          0.34,
+          0.3,
           0.1
         );
       }

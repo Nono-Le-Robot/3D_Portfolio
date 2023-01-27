@@ -57,7 +57,7 @@ export default function BtnProjects({ firstEnd }) {
     if (firstEnd) {
       sceneRef.current.position.x = MathUtils.lerp(
         sceneRef.current.position.x,
-        0.35,
+        0.3,
         0.1
       );
       if (hoverBtn) {
@@ -70,7 +70,7 @@ export default function BtnProjects({ firstEnd }) {
       if (leaveBtn) {
         sceneRef.current.position.x = MathUtils.lerp(
           sceneRef.current.position.x,
-          0.33,
+          0.29,
           0.1
         );
       }

@@ -121,7 +121,7 @@ export default function App() {
             {/* <LUT /> */}
 
             <HueSaturation saturation={0.05} />
-            <BrightnessContrast contrast={0.1} />
+            <BrightnessContrast contrast={0.05} />
             <Vignette eskil={false} offset={0.1} darkness={0.7} />
           </EffectComposer>
           <Suspense fallback={<Loader />}>

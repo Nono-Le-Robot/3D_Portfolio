@@ -97,7 +97,7 @@ export default function ArrowInfos({ showInfos, hideInfos, hideValue }) {
         document.querySelector("canvas").style.cursor = "default";
         // e.stopPropagation();
       }}
-      scale={3.5}
+      scale={5}
       ref={sceneRef}
     />
   );

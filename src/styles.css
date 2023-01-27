@@ -90,3 +90,13 @@ canvas {
 #skip-intro:hover {
   cursor: pointer;
 }
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:focus,
+a:visited,
+a:active {
+  outline: none;
+}

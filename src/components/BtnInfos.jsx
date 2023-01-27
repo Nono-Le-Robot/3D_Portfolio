@@ -67,20 +67,20 @@ export default function BtnInfos({ firstEnd }) {
     if (firstEnd) {
       sceneRef.current.position.x = MathUtils.lerp(
         sceneRef.current.position.x,
-        0.35,
+        0.3,
         0.1
       );
       if (hoverBtn) {
         sceneRef.current.position.x = MathUtils.lerp(
           sceneRef.current.position.x,
-          0.29,
+          0.26,
           0.1
         );
       }
       if (leaveBtn) {
         sceneRef.current.position.x = MathUtils.lerp(
           sceneRef.current.position.x,
-          0.35,
+          0.29,
           0.1
         );
       }
