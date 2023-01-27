@@ -30,6 +30,47 @@ export default function Desk() {
       "./models/deskcompressed.glb",
       (d) => {
         sceneRef.current.add(d.scene);
+
+        // sceneRef.current.traverse(function (node) {
+        //   if (node.isMesh) {
+        //     node.castShadow = true;
+        //   }
+        // });
+
+        const wallsAdndGround = sceneRef.current.children[0].children.filter(
+          (res) => res.name.includes("Plane")
+        );
+
+        const desk = sceneRef.current.children[0].children.filter((res) =>
+          res.name.includes("Desk")
+        );
+
+        desk.forEach((desk) => {
+          desk.receiveShadow = true;
+        });
+
+        const underdesk = sceneRef.current.children[0].children.filter((res) =>
+          res.name.includes("under")
+        );
+        underdesk.forEach((under) => {
+          under.castShadow = true;
+        });
+
+        const pc = sceneRef.current.children[0].children.filter((res) =>
+          res.name.includes("pc")
+        );
+        pc[0].castShadow = true;
+
+        const screen = sceneRef.current.children[0].children.filter((res) =>
+          res.name.includes("ecran")
+        );
+        screen.forEach((item) => {
+          item.castShadow = true;
+        });
+
+        wallsAdndGround.forEach((plane) => {
+          plane.receiveShadow = true;
+        });
         setLoaded(true);
       },
       null,

@@ -105,8 +105,8 @@ export default function BtnProjects({ firstEnd }) {
     setReduceLight(true);
     const position = {
       1: {
-        cameraPos: [39.64, 4.48, 15.57],
-        target: [39.53, 4.37, 16.08],
+        cameraPos: [39.68, 4.51, 15.75],
+        target: [37.86, 3.81, 22.19],
       },
     };
     state.cameraPos.set(...position[num].cameraPos);

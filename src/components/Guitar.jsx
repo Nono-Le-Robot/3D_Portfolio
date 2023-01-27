@@ -19,6 +19,11 @@ export default function Guitar() {
       "./models/guitarcompressed.glb",
       (d) => {
         sceneRef.current.add(d.scene);
+        sceneRef.current.traverse(function (node) {
+          if (node.isMesh) {
+            node.castShadow = true;
+          }
+        });
         sceneRef.current.position.x = 1.5;
         sceneRef.current.position.z = 7;
         sceneRef.current.position.y = -2.6;
@@ -31,5 +36,5 @@ export default function Guitar() {
     );
   }, []);
 
-  return <mesh scale={1.4} ref={sceneRef} />;
+  return <mesh castShadow scale={1.4} ref={sceneRef} />;
 }

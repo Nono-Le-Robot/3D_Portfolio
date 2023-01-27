@@ -72,7 +72,7 @@ canvas {
   user-select: none;
   position: absolute;
   border-bottom-left-radius: 0.8rem;
-  padding: 1rem;
+  padding: 0.7rem 1.4rem;
   border-top: none;
   font-weight: bold;
   background-color: #0000006c;
@@ -87,6 +87,6 @@ canvas {
   font-size: 1rem;
 }
 
-#skip-intro:hover{
+#skip-intro:hover {
   cursor: pointer;
 }

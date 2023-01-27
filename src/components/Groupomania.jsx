@@ -19,6 +19,11 @@ export default function Groupomania() {
       "./models/groupomania.glb",
       (d) => {
         sceneRef.current.add(d.scene);
+        sceneRef.current.traverse(function (node) {
+          if (node.isMesh) {
+            node.castShadow = true;
+          }
+        });
         sceneRef.current.position.y = 3;
         sceneRef.current.position.x = 24;
         sceneRef.current.position.z = 26.5;

@@ -19,6 +19,11 @@ export default function Vr() {
       "./models/vr.glb",
       (d) => {
         sceneRef.current.add(d.scene);
+        sceneRef.current.traverse(function (node) {
+          if (node.isMesh) {
+            node.castShadow = true;
+          }
+        });
         sceneRef.current.position.x = 1.7;
         sceneRef.current.position.y = -0.55;
         sceneRef.current.position.z = 13.5;

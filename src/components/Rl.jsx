@@ -19,6 +19,11 @@ export default function Guitar() {
       "./models/gamecube.glb",
       (d) => {
         sceneRef.current.add(d.scene);
+        sceneRef.current.traverse(function (node) {
+          if (node.isMesh) {
+            node.castShadow = true;
+          }
+        });
         sceneRef.current.position.x = 1.3;
         sceneRef.current.position.y = -2.3;
         sceneRef.current.position.z = 6.3;
@@ -31,5 +36,5 @@ export default function Guitar() {
     );
   }, []);
 
-  return <mesh scale={0.035} ref={sceneRef} />;
+  return <mesh castShadow scale={0.035} ref={sceneRef} />;
 }

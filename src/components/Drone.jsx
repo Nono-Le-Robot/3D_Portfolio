@@ -26,7 +26,6 @@ export default function Drone() {
   const [ySpeed, setYSpeed] = useState(0.02);
   const { camera, mouse } = useThree();
   const [controlDrone, setControlDrone] = useState(false);
-
   // Initialiser les chargeurs
   const loader = new GLTFLoader();
   const dracoLoader = new DRACOLoader();
@@ -39,12 +38,17 @@ export default function Drone() {
       "./models/dronecompressed.glb",
       (d) => {
         sceneRef.current.add(d.scene);
-        sceneRef.current.position.x = 4;
-        sceneRef.current.position.y = 1;
-        sceneRef.current.position.z = 8.9;
+        sceneRef.current.traverse(function (node) {
+          if (node.isMesh) {
+            node.castShadow = true;
+          }
+        });
+        sceneRef.current.position.x = 5;
+        sceneRef.current.position.y = 1.7;
+        sceneRef.current.position.z = 11.5;
         sceneRef.current.rotation.x = 0;
-        sceneRef.current.rotation.y = 0.1;
-        sceneRef.current.rotation.z = 0.2;
+        sceneRef.current.rotation.y = 0.9;
+        sceneRef.current.rotation.z = -0.05;
         setLoaded(true);
       },
       null,
@@ -58,7 +62,6 @@ export default function Drone() {
     if (loaded) {
       // animation de haut en bas de l'axe y
       if (controlDrone) {
-        setYPos(yPos + ySpeed);
         sceneRef.current.position.y = MathUtils.lerp(
           sceneRef.current.position.y,
           mouse.y * 2,
@@ -67,26 +70,27 @@ export default function Drone() {
         sceneRef.current.rotation.z = MathUtils.lerp(
           sceneRef.current.rotation.z,
           -mouse.y / 8,
-          0.1
+          0.05
         );
         sceneRef.current.position.z = MathUtils.lerp(
           sceneRef.current.position.z,
           (sceneRef.current.position.z = -mouse.x * 7 + 9.5),
-          0.1
+          0.05
         );
         sceneRef.current.rotation.y = MathUtils.lerp(
           sceneRef.current.rotation.y,
           (sceneRef.current.rotation.y = -mouse.x * 2),
-          0.1
+          0.05
         );
         sceneRef.current.rotation.x = MathUtils.lerp(
           sceneRef.current.rotation.x,
           (sceneRef.current.rotation.x = -mouse.x / 8),
-          0.1
+          0.05
         );
       }
-      setYPos(yPos + ySpeed);
-      sceneRef.current.position.y = Math.sin(yPos) * 0.15 * +0.5;
+
+      // setYPos(yPos + ySpeed);
+      // sceneRef.current.position.y = Math.sin(yPos) * 0.15 + 0.5;
 
       // rotation des hélices
       const helices =
@@ -102,8 +106,10 @@ export default function Drone() {
 
   return (
     <mesh
-      scale={1}
-      onClick={() => {
+      castShadow
+      scale={0.7}
+      onClick={(e) => {
+        e.stopPropagation();
         setControlDrone(!controlDrone);
         setStartSoundClick(true);
       }}

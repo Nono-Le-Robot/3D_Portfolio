@@ -41,6 +41,7 @@ export default function FirstPage({ onFirstEnd }) {
     vid.addEventListener("ended", myHandler, false);
     function myHandler(e) {
       setFirstEnd(true);
+      skipBtn.style.display = "none";
       onFirstEnd(true);
     }
     return vid;

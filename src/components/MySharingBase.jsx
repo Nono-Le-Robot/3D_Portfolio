@@ -19,6 +19,11 @@ export default function MySharingBase() {
       "./models/my-sharing-base.glb",
       (d) => {
         sceneRef.current.add(d.scene);
+        sceneRef.current.traverse(function (node) {
+          if (node.isMesh) {
+            node.castShadow = true;
+          }
+        });
         sceneRef.current.position.y = 3;
         sceneRef.current.position.x = 45;
         sceneRef.current.position.z = 26.5;

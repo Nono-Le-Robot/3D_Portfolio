@@ -8,7 +8,10 @@ import {
   EffectComposer,
   BrightnessContrast,
   DepthOfField,
+  SMAA,
+  SSAO,
   Bloom,
+  LUT,
   Vignette,
 } from "@react-three/postprocessing";
 import Loader from "./components/Loader";
@@ -24,10 +27,25 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Vr from "./components/Vr";
 import Camping from "./components/Camping";
 import { AdaptiveDpr, AdaptiveEvents } from "@react-three/drei";
+import LightHelper from "./components/LightHelper";
+import sound from "./sounds/mouse-click.mp3";
+
 extend({ OrbitControls });
 
 export default function App() {
-  const [fullscreen, setFullscreen] = useState(false);
+  const [startSoundClick, setStartSoundClick] = useState(false);
+  const [fullscreen, setFullscreen] = useState(true);
+
+  useEffect(() => {
+    if (startSoundClick) {
+      playSoundClick();
+      setStartSoundClick(false);
+    }
+  }, [startSoundClick]);
+
+  function playSoundClick() {
+    new Audio(sound).play();
+  }
 
   function enterFullScreen(element) {
     setFullscreen(!fullscreen);
@@ -72,7 +90,13 @@ export default function App() {
     <>
       <BrowserRouter>
         <Loader />
-        <button id="fullscreen-btn" onClick={() => enterFullScreen(myDocument)}>
+        <button
+          onClick={(e) => {
+            setStartSoundClick(true);
+            enterFullScreen(myDocument);
+          }}
+          id="fullscreen-btn"
+        >
           FullScreen
         </button>
         <div>
@@ -84,20 +108,25 @@ export default function App() {
           <CameraControls />
           {/* <Camera position={[6, -1, 3]} rotation={[0, 1, 0]} /> */}
           <Lights />
+          {/* <LightHelper /> */}
 
           <EffectComposer multisampling={0} disableNormalPass={true}>
             {/* <DepthOfField
               focusDistance={0}
-              focalLength={0.1}
+              focalLength={0.02}
               bokehScale={2}
               height={460}
             /> */}
-            <HueSaturation saturation={0.2} />
+
+            {/* <LUT /> */}
+
+            <HueSaturation saturation={0.05} />
             <BrightnessContrast contrast={0.1} />
             <Vignette eskil={false} offset={0.1} darkness={0.7} />
           </EffectComposer>
           <Suspense fallback={<Loader />}>
             <Desk />
+
             <Stack />
             <Guitar />
             <Rl />

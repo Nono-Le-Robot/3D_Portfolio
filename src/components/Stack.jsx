@@ -25,6 +25,11 @@ export default function Stack() {
         sceneRef.current.position.y = -4.5;
         sceneRef.current.position.z = -20.6;
         sceneRef.current.add(d.scene);
+        sceneRef.current.traverse(function (node) {
+          if (node.isMesh) {
+            node.castShadow = true;
+          }
+        });
         setLoaded(true);
       },
       null,

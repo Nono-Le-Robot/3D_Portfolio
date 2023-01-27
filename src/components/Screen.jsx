@@ -11,9 +11,6 @@ export default function Screen() {
   const handleFirstEnd = (value) => {
     setFirstEnd(value);
   };
-  useEffect(() => {
-    console.log("fffinniii");
-  }, [firstEnd]);
 
   return (
     <>

@@ -30,7 +30,13 @@ export default function LightHelper() {
 
   return (
     <>
-      <pointLight intensity={1.5} ref={pointRef}>
+      <pointLight
+        shadow-mapSize-height={1920}
+        shadow-mapSize-width={1920}
+        castShadow
+        intensity={1}
+        ref={pointRef}
+      >
         <mesh>
           <sphereGeometry args={[2]}></sphereGeometry>
         </mesh>

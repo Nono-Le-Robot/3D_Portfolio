@@ -19,10 +19,15 @@ export default function Guitar() {
       "./models/plantcompressed.glb",
       (d) => {
         sceneRef.current.add(d.scene);
+        sceneRef.current.traverse(function (node) {
+          if (node.isMesh) {
+            node.castShadow = true;
+          }
+        });
         sceneRef.current.position.z = 6;
         sceneRef.current.position.x = 0;
         sceneRef.current.position.y = -3;
-        sceneRef.current.rotation.y = Math.PI / 2.3;
+        sceneRef.current.rotation.y = Math.PI / 1.75;
       },
       null,
       (e) => {
@@ -31,5 +36,5 @@ export default function Guitar() {
     );
   }, []);
 
-  return <mesh scale={6} ref={sceneRef} />;
+  return <mesh scale={6.2} ref={sceneRef} />;
 }

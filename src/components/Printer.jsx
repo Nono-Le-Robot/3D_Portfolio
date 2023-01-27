@@ -19,6 +19,11 @@ export default function Guitar() {
       "./models/3dprintercompressed.glb",
       (d) => {
         sceneRef.current.add(d.scene);
+        sceneRef.current.traverse(function (node) {
+          if (node.isMesh) {
+            node.receiveShadow = true;
+          }
+        });
         sceneRef.current.position.x = 0;
         sceneRef.current.position.y = -2.7;
         sceneRef.current.position.z = 15.2;
