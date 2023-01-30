@@ -88,7 +88,7 @@ export default function App() {
 
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter basename="/3d-portfolio">
         <Loader />
         <button
           onClick={(e) => {
@@ -102,7 +102,7 @@ export default function App() {
         <div>
           <button id="skip-intro">Skip</button>
         </div>
-        <Canvas id="main" shadows>
+        <Canvas id="main">
           <Orbit />
           {/* <OrbitControls enableDamping={false} /> */}
           <CameraControls />
@@ -110,7 +110,7 @@ export default function App() {
           <Lights />
           {/* <LightHelper /> */}
 
-          <EffectComposer multisampling={0} disableNormalPass={true}>
+          <EffectComposer multisampling={4} disableNormalPass={true}>
             {/* <DepthOfField
               focusDistance={0}
               focalLength={0.02}
@@ -126,7 +126,6 @@ export default function App() {
           </EffectComposer>
           <Suspense fallback={<Loader />}>
             <Desk />
-
             <Stack />
             <Guitar />
             <Rl />
@@ -136,8 +135,8 @@ export default function App() {
             <Vr />
             <Camping />
           </Suspense>
-          {/* <AdaptiveDpr pixelated />
-          <AdaptiveEvents /> */}
+          <AdaptiveDpr pixelated />
+          <AdaptiveEvents />
         </Canvas>
       </BrowserRouter>
     </>

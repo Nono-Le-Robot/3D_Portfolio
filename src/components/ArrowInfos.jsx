@@ -24,10 +24,10 @@ export default function ArrowInfos({ showInfos, hideInfos, hideValue }) {
     loader.load(
       "./models/arrow-infos.glb",
       (d) => {
-        sceneRef.current.position.x = -4.5;
-        sceneRef.current.position.y = 19;
-        sceneRef.current.position.z = 0.31;
-        sceneRef.current.rotation.z = -Math.PI / 2;
+        sceneRef.current.position.x = 0;
+        sceneRef.current.position.y = 16;
+        sceneRef.current.position.z = -2.7;
+        sceneRef.current.rotation.z = -Math.PI / 1;
 
         sceneRef.current.add(d.scene);
         setLoaded(true);
@@ -43,7 +43,7 @@ export default function ArrowInfos({ showInfos, hideInfos, hideValue }) {
     if (showInfos) {
       sceneRef.current.position.x = MathUtils.lerp(
         sceneRef.current.position.x,
-        -3.7,
+        0,
         1
       );
     }
@@ -72,8 +72,8 @@ export default function ArrowInfos({ showInfos, hideInfos, hideValue }) {
   const handleClick = (num) => {
     const position = {
       1: {
-        cameraPos: [7, -1, 3],
-        target: [0, 0, -1.5],
+        cameraPos: [3.6, 0.28, -2.77],
+        target: [0.15, 0.24, -2.77],
       },
     };
     state.cameraPos.set(...position[num].cameraPos);

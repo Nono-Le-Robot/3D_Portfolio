@@ -52,8 +52,8 @@ export default function ArrowBack() {
   const handleClick = (num) => {
     const position = {
       1: {
-        cameraPos: [7, -1, 3],
-        target: [0, 0, -1.5],
+        cameraPos: [3.6, 0.28, -2.77],
+        target: [0.15, 0.24, -2.77],
       },
     };
     state.cameraPos.set(...position[num].cameraPos);

@@ -46,16 +46,14 @@ canvas {
   user-select: none;
   position: absolute;
   padding: 1rem;
-  border-bottom-left-radius: 0.8rem;
   border-bottom-right-radius: 0.8rem;
   border-top: none;
   font-weight: bold;
   background-color: #0000006c;
   z-index: 999;
   width: 150px;
-  left: 50vw;
+  left: 0;
   height: 3vh;
-  transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: center;

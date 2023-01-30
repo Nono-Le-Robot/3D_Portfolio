@@ -51,8 +51,8 @@ export default function FirstPage({ onFirstEnd }) {
     setReady(true);
     const position = {
       1: {
-        cameraPos: [3.46, 0.19, -2.77],
-        target: [0.15, 0.2, -2.77],
+        cameraPos: [3.6, 0.28, -2.77],
+        target: [0.15, 0.24, -2.77],
       },
     };
     state.cameraPos.set(...position[num].cameraPos);

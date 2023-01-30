@@ -8,6 +8,9 @@ import sound from "../sounds/mouse-click.mp3";
 import state from "../state.js";
 import Infos from "./Infos";
 import ArrowInfos from "./ArrowInfos";
+import ArrowMoreInfos from "./ArrowMoreInfos";
+import MoreInfos from "./MoreInfos";
+import ArrowBackMoreInfos from "./ArrowBackMoreInfos";
 
 export default function BtnInfos({ firstEnd }) {
   const [startSoundClick, setStartSoundClick] = useState(false);
@@ -90,8 +93,8 @@ export default function BtnInfos({ firstEnd }) {
   const handleClick = (num) => {
     const position = {
       1: {
-        cameraPos: [5.537545748839983, 24.54338107485829, -0.16122065604840577],
-        target: [-1.426232427599974, 24.454812438899747, -0.16940157882812887],
+        cameraPos: [4.21, 7.05, -3.13],
+        target: [4.21, 9.23, -3.13],
       },
     };
 
@@ -105,11 +108,22 @@ export default function BtnInfos({ firstEnd }) {
     <>
       <group>
         <Infos hideValue={hideInfos} showInfos={showInfos} />
+        {/* <MoreInfos hideValue={hideInfos} showInfos={showInfos} /> */}
         <ArrowInfos
           hideValue={hideInfos}
           hideInfos={setHideInfos}
           showInfos={showInfos}
         />
+        {/* <ArrowBackMoreInfos
+          hideValue={hideInfos}
+          hideInfos={setHideInfos}
+          showInfos={showInfos}
+        />
+        <ArrowMoreInfos
+          hideValue={hideInfos}
+          hideInfos={setHideInfos}
+          showInfos={showInfos}
+        /> */}
         <mesh
           position={[0.45, -1.2, -1.5]}
           rotation={[0, -1.57, 0]}

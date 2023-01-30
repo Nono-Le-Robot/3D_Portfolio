@@ -35,9 +35,11 @@ export default function Infos({ showInfos, hideValue }) {
             node.castShadow = true;
           }
         });
-        sceneRef.current.position.x = -5;
-        sceneRef.current.position.y = 20;
-        sceneRef.current.position.z = 0;
+        sceneRef.current.position.x = -8;
+        sceneRef.current.position.y = 16.15;
+        sceneRef.current.position.z = -3;
+        sceneRef.current.rotation.z = -Math.PI / 2;
+        sceneRef.current.rotation.y = Math.PI / 0.24998;
         setLoaded(true);
       },
       null,
@@ -50,7 +52,7 @@ export default function Infos({ showInfos, hideValue }) {
     if (showInfos) {
       sceneRef.current.position.x = MathUtils.lerp(
         sceneRef.current.position.x,
-        -3.7,
+        0,
         1
       );
     }
@@ -59,7 +61,7 @@ export default function Infos({ showInfos, hideValue }) {
     if (hideValue) {
       sceneRef.current.position.x = MathUtils.lerp(
         sceneRef.current.position.x,
-        -5,
+        -15,
         1
       );
     }
@@ -84,7 +86,7 @@ export default function Infos({ showInfos, hideValue }) {
     if (showInfos) {
       sceneRef.current.position.x = MathUtils.lerp(
         sceneRef.current.position.x,
-        -3.7,
+        -0.2,
         1
       );
     }

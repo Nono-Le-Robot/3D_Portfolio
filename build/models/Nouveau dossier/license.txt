@@ -1,8 +1,0 @@
-Model Information:
-* title:	I'd Rather Be Camping - Autumn
-* source:	https://sketchfab.com/3d-models/id-rather-be-camping-autumn-b47c7c6948c540dca53aaf514757c256
-* author:	BeckGibson (https://sketchfab.com/beckgibson)
-
-Model License:
-* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
-* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works

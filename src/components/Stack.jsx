@@ -4,6 +4,8 @@ import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { useFrame } from "@react-three/fiber";
 import { useControls } from "leva";
 import ArrowBack from "../components/ArrowBack";
+import ArrowMoreCompetences from "./ArrowMoreCompetences";
+import MoreCompetences from "./MoreCompetences";
 
 export default function Stack() {
   // Récupérer la référence de la scène
@@ -56,7 +58,9 @@ export default function Stack() {
   return (
     <group>
       <mesh ref={sceneRef} />;
+      <ArrowMoreCompetences />
       <ArrowBack />
+      <MoreCompetences />
     </group>
   );
 }

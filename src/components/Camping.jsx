@@ -32,20 +32,20 @@ export default function Camping() {
         sceneRef.current.position.y = -2.5;
         sceneRef.current.position.z = 8;
         sceneRef.current.rotation.y = -Math.PI / 1.2;
-        const scaredAnimation = d.animations.filter((res) =>
-          res.name.includes("scared")
-        );
+        // const scaredAnimation = d.animations.filter((res) =>
+        //   res.name.includes("scared")
+        // );
 
-        const fireAnimation = d.animations.filter((res) =>
-          res.name.includes("Fire_Fire_0Action.001")
-        );
+        // const fireAnimation = d.animations.filter((res) =>
+        //   res.name.includes("Fire_Fire_0Action.001")
+        // );
 
-        mixer = new THREE.AnimationMixer(d.scene);
-        action = mixer.clipAction(scaredAnimation[0]);
-        fire = mixer.clipAction(fireAnimation[0]);
-        action.repetitions = 1;
-        action.time = 20;
-        fire.play();
+        // mixer = new THREE.AnimationMixer(d.scene);
+        // action = mixer.clipAction(scaredAnimation[0]);
+        // fire = mixer.clipAction(fireAnimation[0]);
+        // action.repetitions = 1;
+        // action.time = 20;
+        // fire.play();
       },
       null,
       (e) => {
@@ -54,28 +54,28 @@ export default function Camping() {
     );
   }, []);
 
-  useFrame((state, delta) => {
-    if (mixer) {
-      mixer.update(delta);
-    }
-  });
+  // useFrame((state, delta) => {
+  //   if (mixer) {
+  //     mixer.update(delta);
+  //   }
+  // });
 
-  const handleClickAnimation = () => {
-    action.reset();
-    action.time = 0.5;
-    action.timeScale = 1.5;
-    action.play();
-  };
+  // const handleClickAnimation = () => {
+  //   action.reset();
+  //   action.time = 0.5;
+  //   action.timeScale = 1.5;
+  //   action.play();
+  // };
 
   return (
     <mesh
-      onClick={() => handleClickAnimation()}
-      onPointerOver={(e) => {
-        document.querySelector("canvas").style.cursor = "pointer";
-      }}
-      onPointerOut={(e) => {
-        document.querySelector("canvas").style.cursor = "default";
-      }}
+      // onClick={() => handleClickAnimation()}
+      // onPointerOver={(e) => {
+      //   document.querySelector("canvas").style.cursor = "pointer";
+      // }}
+      // onPointerOut={(e) => {
+      //   document.querySelector("canvas").style.cursor = "default";
+      // }}
       scale={0.025}
       ref={sceneRef}
     />
