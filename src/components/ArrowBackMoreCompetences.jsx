@@ -77,7 +77,7 @@ export default function ArrowBackMoreCompetences() {
         document.querySelector("canvas").style.cursor = "default";
         // e.stopPropagation();
       }}
-      scale={5}
+      scale={6}
       ref={sceneRef}
     />
   );

@@ -36,7 +36,7 @@ export default function ArrowMoreCompetences() {
     loader.load(
       "./models/arrow.glb",
       (d) => {
-        sceneRef.current.position.x = 45;
+        sceneRef.current.position.x = 45.5;
         sceneRef.current.position.y = 2;
         sceneRef.current.position.z = -21.9;
         sceneRef.current.rotation.y = Math.PI / 1;
@@ -53,8 +53,8 @@ export default function ArrowMoreCompetences() {
   const handleClick = (num) => {
     const position = {
       1: {
-        cameraPos: [65.60543733956023, 1.5124297720091284, -13.831906269065108],
-        target: [65.91379774432717, 1.4857696945550387, -19.417349318440625],
+        cameraPos: [66.16, 1.23, -14.12],
+        target: [66.14, 1.34, -19.43],
       },
     };
     state.cameraPos.set(...position[num].cameraPos);

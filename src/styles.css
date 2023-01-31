@@ -49,15 +49,14 @@ canvas {
   border-bottom-right-radius: 0.8rem;
   border-top: none;
   font-weight: bold;
-  background-color: #0000006c;
+  background-color: #ffffff6c;
   z-index: 999;
-  width: 150px;
-  left: 0;
-  height: 3vh;
+  width: 35px;
+  left: 0vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  top: 0;
+  top: 0vh;
   color: white;
   font-size: 1rem;
 }
@@ -69,20 +68,22 @@ canvas {
 #skip-intro {
   user-select: none;
   position: absolute;
+  padding: 1rem;
   border-bottom-left-radius: 0.8rem;
-  padding: 0.7rem 1.4rem;
   border-top: none;
   font-weight: bold;
-  background-color: #0000006c;
-  height: 50;
-  top: 0;
-  color: white;
-  position: absolute;
+  background-color: #ffffff6c;
   z-index: 999;
+  width: 35px;
   left: 100vw;
-  transform: translate(-100%);
-  display: none;
+  transform: translateX(-99%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0vh;
+  color: white;
   font-size: 1rem;
+  display: none;
 }
 
 #skip-intro:hover {
@@ -97,4 +98,59 @@ a:focus,
 a:visited,
 a:active {
   outline: none;
+}
+
+#more-infos {
+  user-select: none;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  font-size: 1.8rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+#body-infos {
+  margin: 0px 4rem;
+  font-size: 1.4rem;
+}
+
+#back-infos {
+  width: 5rem;
+
+  transform: rotate(-90deg) translateX(1.5rem) scale(0.9);
+}
+
+#back-infos:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1400px) {
+  #body-infos {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  #body-infos {
+    font-size: 0.85rem;
+  }
+  #back-infos {
+    width: 40px;
+  }
+}
+
+@media screen and (max-width: 998px) {
+  #body-infos {
+    font-size: 0.55rem;
+  }
+  #back-infos {
+    width: 30px;
+  }
 }

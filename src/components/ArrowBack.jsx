@@ -36,7 +36,7 @@ export default function ArrowBack() {
     loader.load(
       "./models/arrow.glb",
       (d) => {
-        sceneRef.current.position.x = 16;
+        sceneRef.current.position.x = 17;
         sceneRef.current.position.y = 2;
         sceneRef.current.position.z = -22;
         sceneRef.current.add(d.scene);

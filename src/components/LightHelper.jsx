@@ -30,7 +30,7 @@ export default function LightHelper() {
 
   return (
     <>
-      <spotLight
+      <pointLight
         shadow-mapSize-height={1920}
         shadow-mapSize-width={1920}
         castShadow
@@ -40,7 +40,7 @@ export default function LightHelper() {
         <mesh>
           <sphereGeometry args={[2]}></sphereGeometry>
         </mesh>
-      </spotLight>
+      </pointLight>
     </>
   );
 }

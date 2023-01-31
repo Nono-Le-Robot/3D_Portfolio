@@ -78,8 +78,8 @@ export default function BtnCompetences({ firstEnd }) {
   const handleClick = (num) => {
     const position = {
       1: {
-        cameraPos: [32.2, 2.72, -9.05],
-        target: [31.77, 2.93, -16.92],
+        cameraPos: [31.51, 4.57, -9.13],
+        target: [31.39, 3.91, -16.99],
       },
     };
     state.cameraPos.set(...position[num].cameraPos);

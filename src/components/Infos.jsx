@@ -7,6 +7,7 @@ import { useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import state from "../state.js";
 import ArrowInfos from "./ArrowInfos.jsx";
+import Plus from "./Plus.jsx";
 export default function Infos({ showInfos, hideValue }) {
   const sceneRef = useRef();
   const { camera, mouse } = useThree();
@@ -16,20 +17,18 @@ export default function Infos({ showInfos, hideValue }) {
   loader.setDRACOLoader(dracoLoader);
   const [loaded, setLoaded] = useState(false);
 
+  const [gmailHovered, setGmailHovered] = useState(false);
+  const [gitHubHovered, setGitHubHovered] = useState(false);
+  const [linkedinHovered, setLinkedinHovered] = useState(false);
+  const [cvHovered, setCvHovered] = useState(false);
+
   useEffect(() => {
     loader.load(
       "./models/infos.glb",
       (d) => {
-        console.log(d);
+        // console.log(d);
         sceneRef.current.add(d.scene);
-        const cv = sceneRef.current.children[0].children.filter((res) =>
-          res.name.includes("cv")
-        );
-        const photo = sceneRef.current.children[0].children.filter((res) =>
-          res.name.includes("photo")
-        );
-        cv.castShadow = false;
-        photo.castShadow = false;
+
         sceneRef.current.traverse(function (node) {
           if (node.isMesh) {
             node.castShadow = true;
@@ -90,11 +89,96 @@ export default function Infos({ showInfos, hideValue }) {
         1
       );
     }
+
+    // Detect mouseover on gmail mesh
+    if (loaded) {
+      const raycaster = new THREE.Raycaster();
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(
+        sceneRef.current.children[0].children
+      );
+      if (intersects.length > 0) {
+        // console.log(intersects);
+        for (let index = 0; index < intersects.length; index++) {
+          if (intersects[index].object.name.includes("gmail")) {
+            setGmailHovered(true);
+          } else {
+            setGmailHovered(false);
+          }
+
+          if (intersects[index].object.name.includes("github")) {
+            setGitHubHovered(true);
+          } else {
+            setGitHubHovered(false);
+          }
+
+          if (intersects[index].object.name.includes("linkedIn")) {
+            setLinkedinHovered(true);
+          } else {
+            setLinkedinHovered(false);
+          }
+
+          if (intersects[index].object.name.includes("cv")) {
+            setCvHovered(true);
+          } else {
+            setCvHovered(false);
+          }
+        }
+      } else {
+        setGmailHovered(false);
+        setCvHovered(false);
+        setGitHubHovered(false);
+        setLinkedinHovered(false);
+      }
+    }
   });
+
+  useEffect(() => {
+    if (gmailHovered || linkedinHovered || gitHubHovered || cvHovered) {
+      document.querySelector("canvas").style.cursor = "pointer";
+    } else {
+      document.querySelector("canvas").style.cursor = "default";
+    }
+  }, [gmailHovered, linkedinHovered, gitHubHovered, cvHovered]);
 
   return (
     <group>
-      <mesh scale={1.5} ref={sceneRef} />;
+      <Plus />
+      <mesh
+        onClick={() => {
+          if (gmailHovered) {
+            window.open(
+              "mailto:" +
+                "sannier.renaud@gmail.com" +
+                "?cc=" +
+                "" +
+                "&subject=" +
+                "Contact Portfolio"
+            );
+          }
+
+          if (gitHubHovered) {
+            window.open("https://github.com/Nono-Le-Robot", "_blank");
+          }
+
+          if (linkedinHovered) {
+            window.open(
+              "https://www.linkedin.com/in/renaud-sannier/",
+              "_blank"
+            );
+          }
+
+          if (cvHovered) {
+            window.open(
+              "https://sannier-renaud.fr/standard-portfolio/files/CV_Renaud_Sannier.pdf",
+              "_blank"
+            );
+          }
+        }}
+        scale={1.5}
+        ref={sceneRef}
+      />
+      ;
     </group>
   );
 }

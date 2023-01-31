@@ -20,7 +20,7 @@ export default function MoreInfos({ showInfos, hideValue }) {
     loader.load(
       "./models/more-infos.glb",
       (d) => {
-        console.log(d);
+        // console.log(d);
         sceneRef.current.add(d.scene);
         const cv = sceneRef.current.children[0].children.filter((res) =>
           res.name.includes("cv")

@@ -10,7 +10,7 @@ export default function Lights() {
       ></pointLight> */}
 
       {/* <ambientLight intensity={2} color={0xffddff} /> */}
-      <pointLight
+      {/* <pointLight
         // castShadow
 
         intensity={0.7}
@@ -27,7 +27,10 @@ export default function Lights() {
         // castShadow
         intensity={0.3}
         position={[1, 2.5, 0]}
-      ></pointLight>
+      ></pointLight> */}
+      <pointLight intensity={0.8} position={[1, 2.5, 0]} />
+      <pointLight intensity={0.6} position={[3.2, 8.4, -2.6]} />
+      <pointLight intensity={0.6} position={[43.6, 10.1, 0.0]} />
     </>
   );
 }

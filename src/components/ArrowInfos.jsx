@@ -24,7 +24,7 @@ export default function ArrowInfos({ showInfos, hideInfos, hideValue }) {
     loader.load(
       "./models/arrow-infos.glb",
       (d) => {
-        sceneRef.current.position.x = 0;
+        sceneRef.current.position.x = -0.7;
         sceneRef.current.position.y = 16;
         sceneRef.current.position.z = -2.7;
         sceneRef.current.rotation.z = -Math.PI / 1;
@@ -43,7 +43,7 @@ export default function ArrowInfos({ showInfos, hideInfos, hideValue }) {
     if (showInfos) {
       sceneRef.current.position.x = MathUtils.lerp(
         sceneRef.current.position.x,
-        0,
+        -0.7,
         1
       );
     }
