@@ -103,7 +103,7 @@ export default function App() {
 
   return (
     <>
-      <BrowserRouter basename="/3d-portfolio">
+      <BrowserRouter>
         <div id="more-infos">
           <div id="body-infos">
             <h2>
