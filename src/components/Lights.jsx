@@ -17,9 +17,7 @@ export default function Lights() {
         position={[20, 13, -10]}
       ></pointLight>
       <pointLight
-        castShadow
-        shadow-mapSize-height={4000}
-        shadow-mapSize-width={4000}
+       
         intensity={0.7}
         position={[10, 13, 10]}
       ></pointLight>

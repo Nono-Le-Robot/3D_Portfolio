@@ -26,6 +26,7 @@ export default function MoreCompetences() {
         sceneRef.current.position.x = 60;
         sceneRef.current.position.y = -4;
         sceneRef.current.position.z = -22.2;
+        sceneRef.current.rotation.z = 0.004;
         sceneRef.current.add(d.scene);
         sceneRef.current.traverse(function (node) {
           if (node.isMesh) {

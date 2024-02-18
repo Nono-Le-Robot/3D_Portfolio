@@ -169,7 +169,7 @@ export default function App() {
           <Lights />
           {/* <LightHelper /> */}
 
-          <EffectComposer multisampling={4} disableNormalPass={true}>
+          <EffectComposer multisampling={0} disableNormalPass={true}>
             {/* <DepthOfField
               focusDistance={0}
               focalLength={0.02}

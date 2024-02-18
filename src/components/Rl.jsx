@@ -25,7 +25,7 @@ export default function Guitar() {
           }
         });
         sceneRef.current.position.x = 1.3;
-        sceneRef.current.position.y = -2.3;
+        sceneRef.current.position.y = -2.5;
         sceneRef.current.position.z = 6.3;
         sceneRef.current.rotation.y = Math.PI / 2.5;
       },

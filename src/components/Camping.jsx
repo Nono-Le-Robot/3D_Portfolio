@@ -25,13 +25,13 @@ export default function Camping() {
         sceneRef.current.add(d.scene);
         sceneRef.current.traverse(function (node) {
           if (node.isMesh) {
-            node.receiveShadow = true;
+            node.castShadow = true;
           }
         });
-        sceneRef.current.position.x = 4.5;
-        sceneRef.current.position.y = -2.5;
-        sceneRef.current.position.z = 8;
-        sceneRef.current.rotation.y = -Math.PI / 1.2;
+        sceneRef.current.position.x = 4.8;
+        sceneRef.current.position.y = -2.65;
+        sceneRef.current.position.z = 8.2;
+        sceneRef.current.rotation.y = -Math.PI / 1.1;
         // const scaredAnimation = d.animations.filter((res) =>
         //   res.name.includes("scared")
         // );

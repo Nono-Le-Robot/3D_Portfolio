@@ -103,14 +103,34 @@ export default function Drone() {
       });
     }
   });
+  const handleMouseDown = () => {
+    setControlDrone(true);
+  };
+
+  const handleMouseUp = () => {
+    setControlDrone(false);
+  };
+
+  useEffect(() => {
+    window.addEventListener("mouseup", handleMouseUpWindow);
+    return () => {
+      window.removeEventListener("mouseup", handleMouseUpWindow);
+    };
+  }, []);
+
+  const handleMouseUpWindow = () => {
+    setControlDrone(false);
+  };
 
   return (
     <mesh
       castShadow
       scale={0.7}
+      onPointerDown={handleMouseDown}
+      onPointerUp={handleMouseUp}
       onClick={(e) => {
         e.stopPropagation();
-        setControlDrone(!controlDrone);
+
         setStartSoundClick(true);
       }}
       onPointerOver={(e) => {
